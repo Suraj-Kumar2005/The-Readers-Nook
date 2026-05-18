@@ -4,6 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reader's Nook</title>
+    <script>
+        try {
+            document.documentElement.dataset.theme = localStorage.getItem("readers-nook-theme") || "dark";
+        } catch {
+            document.documentElement.dataset.theme = "dark";
+        }
+    </script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="body_container">
@@ -16,6 +23,34 @@
         <div class="tagline">
             A cozy corner for stories that spark the soul
         </div>
+
+
+        <div class="sticky-bar">
+            <div class="theme_shell" aria-label="Theme selector">
+                <span class="theme_label">Dark</span>
+                <button class="theme_toggle" type="button" aria-label="Switch to reading mode" aria-pressed="false">
+                    <span class="toggle_icon moon_icon" aria-hidden="true"></span>
+                    <span class="toggle_knob"></span>
+                    <span class="toggle_icon sun_icon" aria-hidden="true"></span>
+                </button>
+                <span class="theme_label">Reading</span>
+            </div>
+            <div class="glass-nav">
+                <a href="https://archive.org/" class="nav-btn active">Library</a>
+                <a href="https://www.whichbook.net/" class="nav-btn">Recommendation</a>
+                <a href="https://www.goodreads.com/book/popular_by_date" class="nav-btn">Review</a>
+            </div>
+        </div>
+
+
+
+
+
+
+       
+
+
+
         <main class="main_container">
             <!-- card 1 start -->
         <div class="card_container">
@@ -431,7 +466,7 @@
     <div class="footer-wrapper gradient-panel">
         
         <div class="footer-left">
-            <img src="suraj.jpg" alt="Suraj Kumar" class="footer-profile-photo">
+            <img src="studio_photo2.png" alt="Suraj Kumar" class="footer-profile-photo">
             <div class="footer-name-role">
                 <h3>Suraj Kumar</h3>
                 <p>Mixed-genre reader</p>
@@ -440,13 +475,6 @@
 
         <div class="footer-columns">
 
-            <div class="footer-col">
-                <h4>Explore</h4>
-                <a href="#">Home</a>
-                <a href="#">Categories</a>
-                <a href="#">Top Picks</a>
-                <a href="#">About</a>
-            </div>
 
             <div class="footer-col">
                 <h4>Resources</h4>
@@ -475,5 +503,46 @@
         <p>© 2026 The Reader's Nook • All Rights Reserved</p>
     </div>
 </footer>
+<script>
+    const themeButton = document.querySelector(".theme_toggle");
+    const themeStorageKey = "readers-nook-theme";
+
+    function readTheme() {
+        try {
+            return localStorage.getItem(themeStorageKey);
+        } catch {
+            return null;
+        }
+    }
+
+    function saveTheme(theme) {
+        try {
+            localStorage.setItem(themeStorageKey, theme);
+        } catch {
+            return;
+        }
+    }
+
+    function setTheme(theme) {
+        const nextTheme = theme === "reading" ? "reading" : "dark";
+        const isReading = nextTheme === "reading";
+
+        document.documentElement.dataset.theme = nextTheme;
+        themeButton.setAttribute("aria-pressed", String(isReading));
+        themeButton.setAttribute(
+            "aria-label",
+            isReading ? "Switch to dark mode" : "Switch to reading mode"
+        );
+        saveTheme(nextTheme);
+    }
+
+    setTheme(readTheme() || document.documentElement.dataset.theme || "dark");
+
+    themeButton.addEventListener("click", () => {
+        const currentTheme = document.documentElement.dataset.theme;
+        setTheme(currentTheme === "reading" ? "dark" : "reading");
+    });
+    
+</script>
 </body>
 </html>
