@@ -897,3 +897,32 @@ img {
         transition-duration: 0.001ms !important;
     }
 }
+    
+
+
+
+
+@media (max-width:768px){
+
+    :root{
+        --blur: blur(10px) saturate(125%);
+    }
+    
+    .sticky-bar{
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+    }
+    
+    .glass-nav{
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+    }
+    
+    body::before,
+    body::after{
+        animation: ambientShift 32s ease-in-out infinite alternate;
+        filter: blur(28px);
+    }
+    
+    }
+
