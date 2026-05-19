@@ -923,6 +923,11 @@ img {
         animation: ambientShift 32s ease-in-out infinite alternate;
         filter: blur(28px);
     }
+    .sticky-bar{
+
+        contain: paint;
+        
+        }
     
     }
 
