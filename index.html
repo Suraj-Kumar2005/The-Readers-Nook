@@ -7,6 +7,10 @@
     <title>Reader's Nook</title>
     <script>
         try {
+            if (!localStorage.getItem("readers-nook-theme-v2")) {
+                localStorage.removeItem("readers-nook-theme");
+                localStorage.setItem("readers-nook-theme-v2", "1");
+            }
             document.documentElement.dataset.theme = localStorage.getItem("readers-nook-theme") || "reading";
         } catch {
             document.documentElement.dataset.theme = "reading";
