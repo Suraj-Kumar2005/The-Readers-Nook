@@ -7,9 +7,9 @@
     <title>Reader's Nook</title>
     <script>
         try {
-            document.documentElement.dataset.theme = localStorage.getItem("readers-nook-theme") || "dark";
+            document.documentElement.dataset.theme = localStorage.getItem("readers-nook-theme") || "reading";
         } catch {
-            document.documentElement.dataset.theme = "dark";
+            document.documentElement.dataset.theme = "reading";
         }
     </script>
     <link rel="stylesheet" href="style.css">
@@ -536,7 +536,7 @@
         saveTheme(nextTheme);
     }
 
-    setTheme(readTheme() || document.documentElement.dataset.theme || "dark");
+    setTheme(readTheme() || document.documentElement.dataset.theme || "reading");
 
     themeButton.addEventListener("click", () => {
         const currentTheme = document.documentElement.dataset.theme;
